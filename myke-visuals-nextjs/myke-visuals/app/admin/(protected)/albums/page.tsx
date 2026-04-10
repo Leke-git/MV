@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import Link from "next/link";
 import Image from "next/image";
@@ -44,7 +45,6 @@ export default async function AdminAlbumsPage() {
                     <span style={{ fontFamily: '"Satoshi", sans-serif', fontSize: "13px" }}>No cover image</span>
                   </div>
                 )}
-                {/* Published badge */}
                 <div style={{ position: "absolute", top: "12px", right: "12px" }}>
                   <span style={{ fontFamily: '"Satoshi", sans-serif', fontSize: "11px", letterSpacing: "0.05em", textTransform: "uppercase", color: album.published ? "#4ade80" : "#bababa", background: "rgba(0,0,0,0.7)", padding: "3px 8px", borderRadius: "3px" }}>
                     {album.published ? "Published" : "Draft"}
@@ -60,7 +60,7 @@ export default async function AdminAlbumsPage() {
                 </p>
                 <div style={{ display: "flex", gap: "12px" }}>
                   <Link href={`/admin/albums/${album.id}/edit`} style={{ fontFamily: '"Satoshi", sans-serif', fontSize: "13px", color: "#ff7738", textDecoration: "none" }}>Edit</Link>
-                  <Link href={`/albums/${album.slug}`} target="_blank" style={{ fontFamily: '"Satoshi", sans-serif', fontSize: "13px", color: "#bababa", textDecoration: "none" }}>View</Link>
+                  <Link href={`/albums/${album.slug}`} target="_blank" style={{ fontFamily: '"Satoshi", sans-serif', fontSize: "13px", color: "#bababa", textDecoration: "none" }}>View ↗</Link>
                 </div>
               </div>
             </div>
