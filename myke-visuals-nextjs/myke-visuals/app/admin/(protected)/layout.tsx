@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
 import { redirect } from "next/navigation";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createServerSupabaseClient, createAdminClient } from "@/lib/supabase/server";
 import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export default async function ProtectedAdminLayout({ children }: { children: React.ReactNode }) {
@@ -10,7 +10,9 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
 
   if (!user) redirect("/admin/login");
 
-  const { data: profile } = await supabase
+  // Get profile for name and role
+  const adminSupabase = createAdminClient();
+  const { data: profile } = await adminSupabase
     .from("profiles")
     .select("full_name, role")
     .eq("id", user.id)
@@ -23,12 +25,12 @@ export default async function ProtectedAdminLayout({ children }: { children: Rea
         userName={profile?.full_name || user.email || ""}
         userRole={profile?.role || "admin"}
       />
-      <main id="admin-main" style={{ flex: 1, overflow: "auto", padding: "40px", marginLeft: "260px" }}>
+      <main style={{ flex: 1, overflow: "auto", padding: "40px", marginLeft: "260px" }}>
         {children}
       </main>
       <style>{`
         @media (max-width: 1024px) {
-          #admin-main { margin-left: 0 !important; padding: 20px !important; }
+          main { margin-left: 0 !important; padding: 20px !important; }
         }
       `}</style>
     </div>
