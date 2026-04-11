@@ -317,16 +317,4 @@ export default function BlogEditor({ post }: Props) {
     </div>
   );
 
-  function renderMarkdown(md: string) {
-    return md
-      .replace(/^### (.+)/gm, '<h3 style="font-family: \'Clash Display\', sans-serif; font-size: 20px; color: #faf5ea; margin: 24px 0 12px; font-weight: 400;">$1</h3>')
-      .replace(/^## (.+)/gm, '<h2 style="font-family: \'Clash Display\', sans-serif; font-size: 26px; color: #faf5ea; margin: 32px 0 16px; font-weight: 400;">$1</h2>')
-      .replace(/^# (.+)/gm, '<h1 style="font-family: \'Clash Display\', sans-serif; font-size: 36px; color: #faf5ea; margin: 40px 0 20px; font-weight: 400;">$1</h1>')
-      .replace(/\*\*(.+?)\*\*/g, '<strong style="color: #faf5ea; font-weight: 600;">$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>')
-      .replace(/`(.+?)`/g, '<code style="background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #ff7738;">$1</code>')
-      .replace(/^\- (.+)/gm, '<li style="margin-bottom: 6px;">$1</li>')
-      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" style="color: #ff7738;">$1</a>')
-      .replace(/\n\n/g, '</p><p style="margin: 0 0 20px; color: #bababa; line-height: 1.8; font-weight: 300;">');
-  }
 }
