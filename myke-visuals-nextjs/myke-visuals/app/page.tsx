@@ -19,8 +19,24 @@ export default async function HomePage() {
 
   return (
     <PublicLayout>
-      <HeroSection />
-      <StatsSection />
+      {/*
+        Hero + Stats share a stacking context.
+        Hero is sticky so the image stays in view while Stats scroll over it.
+        Stats have a semi-transparent background so the hero bleeds through.
+      */}
+      <div style={{ position: "relative" }}>
+        {/* Hero sticks while stats pass over it */}
+        <div style={{ position: "sticky", top: 0, zIndex: 0 }}>
+          <HeroSection />
+        </div>
+        {/* Stats scroll over the sticky hero */}
+        <div style={{ position: "relative", zIndex: 1, marginTop: "-100vh" }}>
+          {/* Spacer so stats start below the fold */}
+          <div style={{ height: "100vh" }} />
+          <StatsSection />
+        </div>
+      </div>
+
       <AboutSection />
       <AlbumsSection albums={albums} />
       <ServicesSection />

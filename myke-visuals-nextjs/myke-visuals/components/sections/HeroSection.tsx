@@ -7,8 +7,11 @@ import Link from "next/link";
 export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 1.06]);
+
+  // Hero image fades out as stats scroll over it
+  const imageOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Bottom bar fades out early
+  const bottomOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
     <section ref={ref} style={{
@@ -19,31 +22,31 @@ export default function HeroSection() {
       background: "var(--color-bg)",
       overflow: "hidden",
     }}>
-      {/* Background image — centered, fades on scroll */}
+      {/* Background image — fixed, fades out as stats scroll over */}
       <motion.div style={{
         position: "absolute", inset: 0,
         backgroundImage: "url('/assets/images/hero-bg.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center center",
-        zIndex: 0, opacity, scale,
-        transformOrigin: "center center",
+        zIndex: 0,
+        opacity: imageOpacity,
       }} />
 
-      {/* Overlay */}
+      {/* Overlay gradient */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.55) 100%)",
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.25) 50%, rgba(0,0,0,0.5) 100%)",
         zIndex: 1,
       }} />
 
-      {/* Top-right: intro text + CTA */}
+      {/* Top-right: intro text + CTA — upper third */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.9, delay: 0.5 }}
         style={{
           position: "absolute",
-          top: "clamp(100px, 20vh, 220px)",
+          top: "clamp(100px, 18vh, 200px)",
           right: "40px",
           maxWidth: "340px",
           textAlign: "right",
@@ -65,57 +68,46 @@ export default function HeroSection() {
           BRANDS — EVERY FRAME INTENTIONAL, EVERY IMAGE EARNED.
         </p>
 
-        {/* Split outlined CTA button */}
+        {/* Split outlined CTA */}
         <Link
           href="https://wa.me/message/OTYCTLJLVBSWN1"
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            display: "inline-flex",
-            alignItems: "stretch",
-            fontFamily: "var(--font-display)",
-            fontSize: "11px",
-            fontWeight: 500,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            textDecoration: "none",
+            display: "inline-flex", alignItems: "stretch",
+            fontFamily: "var(--font-display)", fontSize: "11px",
+            fontWeight: 500, letterSpacing: "0.1em",
+            textTransform: "uppercase", textDecoration: "none",
             border: "1px solid var(--color-text-primary)",
           }}
         >
-          <span style={{
-            padding: "13px 20px",
-            color: "var(--color-text-primary)",
-            display: "flex", alignItems: "center",
-          }}>
+          <span style={{ padding: "13px 20px", color: "var(--color-text-primary)", display: "flex", alignItems: "center" }}>
             WORK WITH ME
           </span>
           <span style={{
             padding: "13px 14px",
             borderLeft: "1px solid var(--color-text-primary)",
             color: "var(--color-text-primary)",
-            display: "flex", alignItems: "center",
-            fontSize: "15px",
-          }}>
-            →
-          </span>
+            display: "flex", alignItems: "center", fontSize: "15px",
+          }}>→</span>
         </Link>
       </motion.div>
 
-      {/* Bottom-left: headline — 157px, 2 lines */}
+      {/* Bottom-left: headline — anchored higher so it doesn't get cut */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.1 }}
         style={{
           position: "absolute",
-          bottom: "52px",
+          bottom: "clamp(60px, 10vh, 120px)",
           left: "40px",
           zIndex: 2,
         }}
       >
         <h1 style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(56px, 10.5vw, 157px)",
+          fontSize: "clamp(48px, 9.5vw, 148px)",
           fontWeight: 400,
           lineHeight: 0.9,
           letterSpacing: "-0.05em",
@@ -127,13 +119,14 @@ export default function HeroSection() {
         </h1>
       </motion.div>
 
-      {/* Bottom bar — line then labels */}
+      {/* Bottom bar — fades out on scroll */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.0 }}
         style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2,
+          position: "absolute", bottom: 0, left: 0, right: 0,
+          zIndex: 2, opacity: bottomOpacity,
         }}
       >
         <div style={{ borderTop: "1px solid rgba(250,245,234,0.2)" }} />
