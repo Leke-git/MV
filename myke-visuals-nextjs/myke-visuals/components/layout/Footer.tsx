@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -11,188 +14,167 @@ const navLinks = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: "https://www.instagram.com/mykevisuals/" },
-  { label: "Behance", href: "https://www.behance.net/michaelenekwe" },
-  { label: "Youtube", href: "https://www.youtube.com/@MykeVisuals" },
-  { label: "Whatsapp", href: "https://wa.me/message/OTYCTLJLVBSWN1" },
+  { label: "Instagram", href: "https://www.instagram.com/mykevisuals/", icon: "◎" },
+  { label: "Behance", href: "https://www.behance.net/michaelenekwe", icon: "Bē" },
+  { label: "Youtube", href: "https://www.youtube.com/@MykeVisuals", icon: "▷" },
+  { label: "Whatsapp", href: "https://wa.me/message/OTYCTLJLVBSWN1", icon: "◉" },
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
-    <footer
-      style={{
-        background: "var(--color-bg)",
-        borderTop: "1px solid var(--color-border-subtle)",
-        padding: "60px 40px 40px",
-      }}
-    >
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        {/* Top Row */}
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            gap: "40px",
-            marginBottom: "60px",
-            flexWrap: "wrap",
-          }}
-        >
-          {/* Brand */}
-          <div style={{ maxWidth: "300px" }}>
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "13px",
-                fontWeight: 500,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--color-text-muted)",
-                marginBottom: "16px",
-              }}
-            >
-              MYKE VISUALS
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "14px",
-                color: "var(--color-text-muted)",
-                lineHeight: 1.6,
-              }}
-            >
-              Professional photographer & visual storyteller based in Abuja, Nigeria.
-            </p>
-            <Link
-              href="/contact"
-              style={{
-                display: "inline-block",
-                marginTop: "20px",
-                fontFamily: "var(--font-display)",
-                fontSize: "13px",
-                fontWeight: 500,
-                letterSpacing: "0.05em",
-                textTransform: "uppercase",
-                color: "var(--color-text-primary)",
-                borderBottom: "1px solid var(--color-accent)",
-                paddingBottom: "2px",
-              }}
-            >
-              Let&apos;s Talk
-            </Link>
+    <footer>
+      {/* Orange CTA section */}
+      <div style={{
+        background: "var(--color-accent)",
+        padding: "80px 40px",
+        position: "relative",
+        display: "flex", flexDirection: "column",
+        alignItems: "center", justifyContent: "center",
+        gap: "40px", minHeight: "420px",
+        overflow: "hidden",
+      }}>
+        {/* Corner brackets */}
+        {[
+          { bottom: "28px", left: "28px" },
+          { bottom: "28px", right: "28px" },
+        ].map((pos, i) => (
+          <div key={i} style={{ position: "absolute", width: "24px", height: "24px", ...pos }}>
+            <div style={{
+              position: "absolute", background: "#0a0a0a",
+              ...(i === 0
+                ? { bottom: 0, left: 0, width: "2px", height: "100%" }
+                : { bottom: 0, right: 0, width: "2px", height: "100%" })
+            }} />
+            <div style={{
+              position: "absolute", background: "#0a0a0a",
+              bottom: 0, left: i === 0 ? 0 : undefined, right: i === 1 ? 0 : undefined,
+              width: "100%", height: "2px",
+            }} />
           </div>
+        ))}
 
-          {/* Nav Links */}
-          <div>
-            <p
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "11px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--color-text-muted)",
-                marginBottom: "16px",
-              }}
-            >
-              Navigation
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "14px",
-                    color: "var(--color-text-muted)",
-                    transition: "color 0.2s ease",
-                  }}
-                >
-                  {link.label}
-                </Link>
+        {/* Animated aperture link */}
+        <Link href="/contact" style={{ textDecoration: "none", display: "inline-block" }}>
+          <div className="footer-aperture">
+            <svg viewBox="0 0 120 120" width="160" height="160">
+              <circle cx="60" cy="60" r="58" fill="#0a0a0a" />
+              {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+                <g key={i} transform={`rotate(${angle} 60 60)`}>
+                  <ellipse cx="60" cy="30" rx="14" ry="26" fill="var(--color-text-primary)" className="footer-blade" />
+                </g>
               ))}
-            </div>
+              <polygon points="60,38 74,46 74,62 60,70 46,62 46,46" fill="#0a0a0a" />
+              <text x="60" y="57" textAnchor="middle" fontFamily="var(--font-display)" fontSize="9" fill="var(--color-text-primary)" letterSpacing="0.5" fontWeight="500">LET&apos;S</text>
+              <text x="60" y="68" textAnchor="middle" fontFamily="var(--font-display)" fontSize="9" fill="var(--color-text-primary)" letterSpacing="0.5" fontWeight="500">TALK</text>
+            </svg>
           </div>
+        </Link>
 
-          {/* Social + Contact */}
-          <div>
-            <p
+        {/* Email */}
+        <a href="mailto:info@mykevisuals.com" style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(18px, 3vw, 28px)",
+          fontWeight: 400, letterSpacing: "-0.02em",
+          color: "#0a0a0a", textDecoration: "none",
+        }}>
+          info@mykevisuals.com
+        </a>
+
+        {/* Social links */}
+        <div style={{ display: "flex", gap: "40px", alignItems: "center" }}>
+          {socialLinks.map(link => (
+            <a key={link.label} href={link.href} target="_blank" rel="noopener noreferrer"
               style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "11px",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--color-text-muted)",
-                marginBottom: "16px",
-              }}
-            >
-              Connect
-            </p>
-            <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: "14px",
-                    color: "var(--color-text-muted)",
-                    transition: "color 0.2s ease",
-                  }}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <a
-                href="mailto:info@mykevisuals.com"
-                style={{
-                  fontFamily: "var(--font-body)",
-                  fontSize: "14px",
-                  color: "var(--color-text-muted)",
-                  marginTop: "8px",
-                }}
-              >
-                {/* [README] Update with Myke's actual email */}
-                info@mykevisuals.com
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Row */}
-        <div
-          style={{
-            borderTop: "1px solid var(--color-border-subtle)",
-            paddingTop: "24px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "16px",
-            flexWrap: "wrap",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "12px",
-              color: "var(--color-text-muted)",
-            }}
-          >
-            © {new Date().getFullYear()} Myke Visuals. All rights reserved.
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-mono)",
-              fontSize: "12px",
-              color: "var(--color-text-muted)",
-            }}
-          >
-            Abuja, Nigeria
-          </p>
+                fontFamily: "var(--font-body)", fontSize: "14px",
+                color: "#0a0a0a", textDecoration: "none",
+                display: "flex", alignItems: "center", gap: "6px",
+                letterSpacing: "0.02em",
+              }}>
+              <span style={{ fontSize: "16px" }}>{link.icon}</span>
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
+
+      {/* Black footer bottom */}
+      <div style={{
+        background: "var(--color-bg)",
+        padding: "40px 40px 0",
+      }}>
+        {/* Nav links centered */}
+        <div style={{
+          display: "flex", justifyContent: "center",
+          gap: "clamp(16px, 3vw, 48px)", flexWrap: "wrap",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--color-border-subtle)",
+        }}>
+          {navLinks.map(link => (
+            <Link key={link.href} href={link.href} style={{
+              fontFamily: "var(--font-body)", fontSize: "14px",
+              color: pathname === link.href ? "var(--color-accent)" : "var(--color-text-muted)",
+              textDecoration: "none", letterSpacing: "0.01em",
+              transition: "color 0.2s ease",
+            }}>
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Marquee */}
+        <div style={{
+          overflow: "hidden", padding: "24px 0 0",
+          borderTop: "none",
+        }}>
+          <div className="marquee-track">
+            {[...Array(6)].map((_, i) => (
+              <span key={i} className="marquee-item">
+                MYKE VISUALS
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .footer-aperture {
+          transition: transform 0.5s ease;
+          display: inline-block;
+        }
+        .footer-aperture:hover {
+          transform: rotate(60deg);
+        }
+        .footer-blade {
+          transition: transform 0.5s ease;
+        }
+
+        .marquee-track {
+          display: flex;
+          gap: 0;
+          animation: marquee 18s linear infinite;
+          white-space: nowrap;
+          width: max-content;
+        }
+        .marquee-item {
+          font-family: var(--font-display);
+          font-size: clamp(48px, 8vw, 120px);
+          font-weight: 400;
+          letter-spacing: -0.04em;
+          color: var(--color-text-primary);
+          padding: 0 48px;
+          line-height: 1;
+          opacity: 0.12;
+        }
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @media (max-width: 600px) {
+          .marquee-item { font-size: 40px; padding: 0 24px; }
+        }
+      `}</style>
     </footer>
   );
 }

@@ -1,200 +1,141 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import Link from "next/link";
 
 export default function HeroSection() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 1.08]);
+
   return (
-    <section
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100vh",
-        minHeight: "600px",
-        background: "var(--color-bg)",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      {/* Background image */}
-      {/* [README] Replace src with Myke's actual hero image */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          backgroundImage: "url('/assets/images/hero-bg.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          filter: "contrast(1.1) grayscale(0)",
-          zIndex: 0,
-        }}
-      />
+    <section ref={ref} style={{
+      position: "relative", width: "100%", height: "100vh",
+      minHeight: "600px", background: "var(--color-bg)",
+      overflow: "hidden", display: "flex", flexDirection: "column",
+    }}>
+      {/* Background image — fades + scales on scroll */}
+      <motion.div style={{
+        position: "absolute", inset: 0,
+        backgroundImage: "url('/assets/images/hero-bg.jpg')",
+        backgroundSize: "cover", backgroundPosition: "center top",
+        zIndex: 0, opacity, scale,
+        transformOrigin: "center center",
+      }} />
 
       {/* Dark overlay */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 100%)",
-          zIndex: 1,
-        }}
-      />
+      <div style={{
+        position: "absolute", inset: 0,
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%)",
+        zIndex: 1,
+      }} />
 
-      {/* Bottom content */}
-      <div
+      {/* Top-right text block */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 0.4 }}
         style={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          padding: "130px 40px 50px",
-          zIndex: 2,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-          alignItems: "flex-end",
-          gap: "20px",
+          position: "absolute", top: "50%", right: "40px",
+          transform: "translateY(-80%)",
+          maxWidth: "360px", textAlign: "right", zIndex: 2,
         }}
       >
-        {/* Right-side text block */}
-        <div style={{ maxWidth: "400px", textAlign: "right" }}>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "14px",
-              fontWeight: 300,
-              color: "var(--color-text-primary)",
-              lineHeight: 1.6,
-              letterSpacing: "0.02em",
-              textTransform: "uppercase",
-              marginBottom: "20px",
-            }}
-          >
-            HI, I&apos;M MYKE — PROFESSIONAL PHOTOGRAPHER & VISUAL STORYTELLER
-            BASED IN ABUJA, NIGERIA. I SHOOT PORTRAITS, WEDDINGS, FASHION &
-            BRANDS — EVERY FRAME INTENTIONAL, EVERY IMAGE EARNED.
-          </motion.p>
+        <p style={{
+          fontFamily: "var(--font-body)", fontSize: "13px",
+          fontWeight: 300, color: "var(--color-text-primary)",
+          lineHeight: 1.7, letterSpacing: "0.03em",
+          textTransform: "uppercase", marginBottom: "24px",
+        }}>
+          HI, I&apos;M MYKE — PROFESSIONAL PHOTOGRAPHER & VISUAL STORYTELLER
+          BASED IN ABUJA, NIGERIA. I SHOOT PORTRAITS, WEDDINGS, FASHION &
+          BRANDS — EVERY FRAME INTENTIONAL, EVERY IMAGE EARNED.
+        </p>
+        <Link
+          href="https://wa.me/message/OTYCTLJLVBSWN1"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "12px",
+            fontFamily: "var(--font-display)", fontSize: "12px",
+            fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase",
+            color: "var(--color-bg)", background: "var(--color-text-primary)",
+            padding: "14px 24px", border: "1px solid var(--color-text-primary)",
+          }}
+        >
+          WORK WITH ME
+          <span style={{ fontSize: "16px", lineHeight: 1 }}>→</span>
+        </Link>
+      </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <Link
-              href="https://wa.me/message/OTYCTLJLVBSWN1"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-block",
-                fontFamily: "var(--font-display)",
-                fontSize: "13px",
-                fontWeight: 500,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                color: "var(--color-bg)",
-                background: "var(--color-text-primary)",
-                padding: "14px 28px",
-                transition: "background 0.2s ease",
-              }}
-            >
-              WORK WITH ME
-            </Link>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Large hero title — bottom left */}
+      {/* Bottom-left headline */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.1 }}
         style={{
-          position: "absolute",
-          bottom: "50px",
-          left: "40px",
-          zIndex: 2,
+          position: "absolute", bottom: "60px", left: "40px", zIndex: 2,
         }}
       >
-        <h1
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(66px, 13vw, 157px)",
-            fontWeight: 400,
-            lineHeight: 0.85,
-            letterSpacing: "-0.06em",
-            color: "var(--color-text-primary)",
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-        >
-          Capturing
-          <br />
-          Life&apos;s Best
-          <br />
-          Moments
+        <h1 style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(72px, 11vw, 148px)",
+          fontWeight: 400, lineHeight: 0.88,
+          letterSpacing: "-0.05em",
+          color: "var(--color-text-primary)",
+          pointerEvents: "none", userSelect: "none",
+        }}>
+          Capturing<br />Life&apos;s Best<br />Moments
         </h1>
       </motion.div>
 
-      {/* Scroll indicator */}
+      {/* Bottom bar */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1.0 }}
         style={{
-          position: "absolute",
-          bottom: "30px",
-          right: "40px",
-          zIndex: 2,
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
+          position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2,
         }}
       >
-        <span
-          style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: "11px",
-            color: "var(--color-text-dim)",
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-          }}
-        >
-          Scroll to Explore
-        </span>
+        <div style={{ borderTop: "1px solid rgba(250,245,234,0.25)" }} />
+        <div style={{
+          display: "flex", justifyContent: "space-between", alignItems: "center",
+          padding: "14px 40px",
+        }}>
+          <span style={{
+            fontFamily: "var(--font-mono)", fontSize: "11px",
+            letterSpacing: "0.12em", textTransform: "uppercase",
+            color: "rgba(250,245,234,0.5)",
+          }}>
+            MYKE VISUALS
+          </span>
+          <span style={{
+            fontFamily: "var(--font-mono)", fontSize: "11px",
+            letterSpacing: "0.1em", textTransform: "uppercase",
+            color: "rgba(250,245,234,0.5)",
+          }}>
+            ↓ SCROLL TO EXPLORE
+          </span>
+          <span style={{
+            fontFamily: "var(--font-mono)", fontSize: "11px",
+            letterSpacing: "0.12em", textTransform: "uppercase",
+            color: "rgba(250,245,234,0.5)",
+          }}>
+            WORK WITH ME
+          </span>
+        </div>
       </motion.div>
-
-      {/* Brand watermark */}
-      <div
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          zIndex: 1,
-          pointerEvents: "none",
-          userSelect: "none",
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "var(--font-display)",
-            fontSize: "clamp(14px, 2vw, 20px)",
-            letterSpacing: "0.3em",
-            textTransform: "uppercase",
-            color: "rgba(255,255,255,0.15)",
-          }}
-        >
-          MYKE VISUALS
-        </p>
-      </div>
 
       <style>{`
         @media (max-width: 809px) {
-          section > div:nth-child(4) { padding: 100px 12px 120px; }
+          .hero-text-block {
+            top: auto !important; bottom: 200px !important;
+            right: 20px !important; left: 20px !important;
+            transform: none !important; text-align: left !important;
+          }
         }
       `}</style>
     </section>
