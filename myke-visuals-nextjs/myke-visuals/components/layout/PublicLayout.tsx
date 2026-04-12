@@ -3,13 +3,17 @@ import Footer from "@/components/layout/Footer";
 
 export default function PublicLayout({
   children,
+  heroPadding = false,
 }: {
   children: React.ReactNode;
+  heroPadding?: boolean;
 }) {
   return (
     <>
       <Navbar />
-      <main style={{ paddingTop: "var(--nav-height)" }}>{children}</main>
+      <main style={{ paddingTop: heroPadding ? "var(--nav-height)" : 0 }}>
+        {children}
+      </main>
       <Footer />
     </>
   );

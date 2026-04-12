@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <PublicLayout>
+    <PublicLayout heroPadding>
       <section style={{ background: "var(--color-bg)", padding: "120px 40px 150px", minHeight: "100vh" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", gap: "100px", alignItems: "flex-start", flexWrap: "wrap" }}>
           {/* Left */}

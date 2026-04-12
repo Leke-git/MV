@@ -39,7 +39,7 @@ export default async function AlbumPage({ params }: Props) {
   const allImages = [album.cover_image, ...(album.images || [])].filter(Boolean);
 
   return (
-    <PublicLayout>
+    <PublicLayout heroPadding>
       {/* Hero */}
       <section style={{ position: "relative", height: "100vh", minHeight: "500px", overflow: "hidden" }}>
         <Image src={album.cover_image || "/assets/images/placeholder.jpg"} alt={album.title} fill priority style={{ objectFit: "cover" }} sizes="100vw" />

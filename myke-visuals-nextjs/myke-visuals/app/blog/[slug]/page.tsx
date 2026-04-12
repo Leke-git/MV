@@ -38,7 +38,7 @@ export default async function BlogPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <PublicLayout>
+    <PublicLayout heroPadding>
       {/* Hero */}
       {post.cover_image && (
         <section style={{ position: "relative", height: "60vh", minHeight: "400px", overflow: "hidden" }}>

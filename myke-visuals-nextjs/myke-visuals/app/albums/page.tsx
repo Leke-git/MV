@@ -13,7 +13,7 @@ export default async function AlbumsPage() {
   const albums = await getAlbums();
 
   return (
-    <PublicLayout>
+    <PublicLayout heroPadding>
       <section style={{ background: "var(--color-bg)", padding: "120px 40px 150px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           <div style={{ marginBottom: "60px" }}>

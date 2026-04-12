@@ -55,7 +55,7 @@ const awards = [
 
 export default function AboutPage() {
   return (
-    <PublicLayout>
+    <PublicLayout heroPadding>
       {/* Hero */}
       <PageHero
         overline="MYKE VISUALS PHOTOGRAPHY"

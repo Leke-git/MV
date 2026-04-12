@@ -30,7 +30,7 @@ const useCases = [
 
 export default function StudioPage() {
   return (
-    <PublicLayout>
+    <PublicLayout heroPadding>
       {/* Hero */}
       <PageHero
         overline="MYKE VISUALS — ABUJA'S CREATIVE SPACE"

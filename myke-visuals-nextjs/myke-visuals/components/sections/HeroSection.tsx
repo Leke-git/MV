@@ -8,121 +8,175 @@ export default function HeroSection() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 1.08]);
+  const scale = useTransform(scrollYProgress, [0, 0.6], [1, 1.06]);
 
   return (
     <section ref={ref} style={{
-      position: "relative", width: "100%", height: "100vh",
-      minHeight: "600px", background: "var(--color-bg)",
-      overflow: "hidden", display: "flex", flexDirection: "column",
+      position: "relative",
+      width: "100%",
+      height: "100vh",
+      minHeight: "600px",
+      background: "var(--color-bg)",
+      overflow: "hidden",
+      display: "flex",
+      flexDirection: "column",
+      // Section itself starts at 0 — no padding-top since PublicLayout no longer adds it
     }}>
-      {/* Background image — fades + scales on scroll */}
+      {/* Background image — fills from very top, fades on scroll */}
       <motion.div style={{
-        position: "absolute", inset: 0,
+        position: "absolute",
+        inset: 0,
         backgroundImage: "url('/assets/images/hero-bg.jpg')",
-        backgroundSize: "cover", backgroundPosition: "center top",
-        zIndex: 0, opacity, scale,
+        backgroundSize: "cover",
+        backgroundPosition: "center top",
+        zIndex: 0,
+        opacity,
+        scale,
         transformOrigin: "center center",
       }} />
 
-      {/* Dark overlay */}
+      {/* Overlay */}
       <div style={{
         position: "absolute", inset: 0,
-        background: "linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%)",
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 50%, rgba(0,0,0,0.6) 100%)",
         zIndex: 1,
       }} />
 
-      {/* Top-right text block */}
+      {/* Top-right: intro text + CTA — positioned in upper third */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 0.4 }}
+        transition={{ duration: 0.9, delay: 0.5 }}
         style={{
-          position: "absolute", top: "50%", right: "40px",
-          transform: "translateY(-80%)",
-          maxWidth: "360px", textAlign: "right", zIndex: 2,
+          position: "absolute",
+          top: "clamp(100px, 18vh, 200px)",
+          right: "40px",
+          maxWidth: "360px",
+          textAlign: "right",
+          zIndex: 2,
         }}
       >
         <p style={{
-          fontFamily: "var(--font-body)", fontSize: "13px",
-          fontWeight: 300, color: "var(--color-text-primary)",
-          lineHeight: 1.7, letterSpacing: "0.03em",
-          textTransform: "uppercase", marginBottom: "24px",
+          fontFamily: "var(--font-body)",
+          fontSize: "13px",
+          fontWeight: 300,
+          color: "var(--color-text-primary)",
+          lineHeight: 1.75,
+          letterSpacing: "0.03em",
+          textTransform: "uppercase",
+          marginBottom: "28px",
         }}>
           HI, I&apos;M MYKE — PROFESSIONAL PHOTOGRAPHER & VISUAL STORYTELLER
           BASED IN ABUJA, NIGERIA. I SHOOT PORTRAITS, WEDDINGS, FASHION &
           BRANDS — EVERY FRAME INTENTIONAL, EVERY IMAGE EARNED.
         </p>
+
+        {/* CTA button — Framer style: outlined box with arrow in separate right section */}
         <Link
           href="https://wa.me/message/OTYCTLJLVBSWN1"
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            display: "inline-flex", alignItems: "center", gap: "12px",
-            fontFamily: "var(--font-display)", fontSize: "12px",
-            fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase",
-            color: "var(--color-bg)", background: "var(--color-text-primary)",
-            padding: "14px 24px", border: "1px solid var(--color-text-primary)",
+            display: "inline-flex",
+            alignItems: "stretch",
+            fontFamily: "var(--font-display)",
+            fontSize: "12px",
+            fontWeight: 500,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            textDecoration: "none",
+            border: "1px solid var(--color-text-primary)",
           }}
         >
-          WORK WITH ME
-          <span style={{ fontSize: "16px", lineHeight: 1 }}>→</span>
+          <span style={{
+            padding: "14px 20px",
+            color: "var(--color-text-primary)",
+            display: "flex",
+            alignItems: "center",
+          }}>
+            WORK WITH ME
+          </span>
+          <span style={{
+            padding: "14px 16px",
+            borderLeft: "1px solid var(--color-text-primary)",
+            color: "var(--color-text-primary)",
+            display: "flex",
+            alignItems: "center",
+            fontSize: "16px",
+          }}>
+            →
+          </span>
         </Link>
       </motion.div>
 
-      {/* Bottom-left headline */}
+      {/* Bottom-left: large headline — 2 lines */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.1 }}
         style={{
-          position: "absolute", bottom: "60px", left: "40px", zIndex: 2,
+          position: "absolute",
+          bottom: "52px",
+          left: "40px",
+          right: "40px",
+          zIndex: 2,
         }}
       >
         <h1 style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(72px, 11vw, 148px)",
-          fontWeight: 400, lineHeight: 0.88,
+          fontSize: "clamp(72px, 13.5vw, 190px)",
+          fontWeight: 400,
+          lineHeight: 0.88,
           letterSpacing: "-0.05em",
           color: "var(--color-text-primary)",
-          pointerEvents: "none", userSelect: "none",
+          pointerEvents: "none",
+          userSelect: "none",
+          whiteSpace: "nowrap",
         }}>
-          Capturing<br />Life&apos;s Best<br />Moments
+          Capturing Life&apos;s Best
+          <br />
+          Moments
         </h1>
       </motion.div>
 
-      {/* Bottom bar */}
+      {/* Bottom bar — line first, then labels below */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.0 }}
         style={{
-          position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 2,
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 2,
         }}
       >
         <div style={{ borderTop: "1px solid rgba(250,245,234,0.25)" }} />
         <div style={{
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-          padding: "14px 40px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "12px 40px",
         }}>
           <span style={{
-            fontFamily: "var(--font-mono)", fontSize: "11px",
+            fontFamily: "var(--font-mono)", fontSize: "10px",
             letterSpacing: "0.12em", textTransform: "uppercase",
-            color: "rgba(250,245,234,0.5)",
+            color: "rgba(250,245,234,0.45)",
           }}>
             MYKE VISUALS
           </span>
           <span style={{
-            fontFamily: "var(--font-mono)", fontSize: "11px",
+            fontFamily: "var(--font-mono)", fontSize: "10px",
             letterSpacing: "0.1em", textTransform: "uppercase",
-            color: "rgba(250,245,234,0.5)",
+            color: "rgba(250,245,234,0.45)",
           }}>
             ↓ SCROLL TO EXPLORE
           </span>
           <span style={{
-            fontFamily: "var(--font-mono)", fontSize: "11px",
+            fontFamily: "var(--font-mono)", fontSize: "10px",
             letterSpacing: "0.12em", textTransform: "uppercase",
-            color: "rgba(250,245,234,0.5)",
+            color: "rgba(250,245,234,0.45)",
           }}>
             WORK WITH ME
           </span>
@@ -130,12 +184,11 @@ export default function HeroSection() {
       </motion.div>
 
       <style>{`
-        @media (max-width: 809px) {
-          .hero-text-block {
-            top: auto !important; bottom: 200px !important;
-            right: 20px !important; left: 20px !important;
-            transform: none !important; text-align: left !important;
-          }
+        @media (max-width: 900px) {
+          h1 { font-size: clamp(44px, 10vw, 100px) !important; white-space: normal !important; }
+        }
+        @media (max-width: 600px) {
+          h1 { font-size: 13vw !important; }
         }
       `}</style>
     </section>
