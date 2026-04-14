@@ -87,9 +87,9 @@ export default function StatsSection() {
             </span>
             <span style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(64px, 9vw, 130px)",
+              fontSize: "clamp(72px, 10vw, 140px)",
               fontWeight: 400,
-              letterSpacing: "-0.04em",
+              letterSpacing: "-0.045em",
               lineHeight: 1,
             }}>
               <AnimatedCounter value={stat.value} suffix={stat.suffix} inView={inView} />

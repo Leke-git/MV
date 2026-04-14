@@ -140,17 +140,17 @@ export default function BlogSection({ posts }: Props) {
           <div>
             <p style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(16px, 2vw, 20px)",
+              fontSize: "clamp(15px, 1.8vw, 20px)",
               fontWeight: 300, letterSpacing: "-0.01em",
-              color: "var(--color-text-primary)",
-              lineHeight: 1.2, marginBottom: "4px",
+              color: "var(--color-text-muted)",
+              lineHeight: 1.2, marginBottom: "6px",
             }}>
               Stay inspired with my
             </p>
             <h2 style={{
               fontFamily: "var(--font-display)",
-              fontSize: "clamp(32px, 5vw, 64px)",
-              fontWeight: 400, letterSpacing: "-0.04em", lineHeight: 1,
+              fontSize: "clamp(36px, 6vw, 72px)",
+              fontWeight: 400, letterSpacing: "-0.045em", lineHeight: 0.9,
               color: "var(--color-accent)",
             }}>
               Insightful Articles

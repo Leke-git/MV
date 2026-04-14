@@ -50,20 +50,34 @@
 }
 
 :root {
+  /* === Framer style guide colors === */
+  --color-deep-orange: #e05c00;
+  --color-light-orange: #ff8534;
+  --color-creamy-white: #faf0e0;
+  --color-white-100: #ffffff;
+  --color-white-80: rgba(255,255,255,0.8);
+  --color-white-50: rgba(255,255,255,0.5);
+  --color-white-30: rgba(255,255,255,0.3);
+  --color-white-10: rgba(255,255,255,0.10);
+  --color-white-5: rgba(255,255,255,0.05);
+  --color-matt-black: #111111;
+  --color-black: #0a0a0a;
+
+  /* === Semantic aliases === */
   --color-bg: #0a0a0a;
   --color-bg-secondary: #111111;
-  --color-accent: #ff7738;
-  --color-accent-hover: #e8832a;
-  --color-accent-dark: #c4621a;
-  --color-text-primary: #faf5ea;
+  --color-accent: #e05c00;
+  --color-accent-light: #ff8534;
+  --color-accent-hover: #c45200;
+  --color-text-primary: #faf0e0;
   --color-text-white: #ffffff;
-  --color-text-muted: #bababa;
-  --color-text-dim: rgba(255, 255, 255, 0.5);
-  --color-border-subtle: rgba(255, 255, 255, 0.1);
-  --color-border-mid: rgba(255, 255, 255, 0.3);
-  --color-border-strong: rgba(255, 255, 255, 0.5);
-  --color-surface: rgba(255, 255, 255, 0.05);
-  --color-surface-hover: rgba(255, 255, 255, 0.08);
+  --color-text-muted: rgba(250,240,224,0.65);
+  --color-text-dim: rgba(255,255,255,0.5);
+  --color-border-subtle: rgba(255,255,255,0.10);
+  --color-border-mid: rgba(255,255,255,0.30);
+  --color-border-strong: rgba(255,255,255,0.5);
+  --color-surface: rgba(255,255,255,0.05);
+  --color-surface-hover: rgba(255,255,255,0.08);
   --font-display: "Clash Display", sans-serif;
   --font-body: "Satoshi", sans-serif;
   --font-mono: "Fragment Mono", monospace;

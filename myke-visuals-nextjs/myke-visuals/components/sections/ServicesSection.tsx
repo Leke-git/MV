@@ -9,7 +9,7 @@ const services = [
     description: "Whether it's a personal brand shoot, corporate headshot, or creative portrait session, Myke brings precision lighting and a calm, collaborative approach that draws out your most powerful self.",
     image: "/assets/images/service-portrait.jpg",
     cardBg: "rgba(10,10,10,0.75)",
-    cardColor: "#faf5ea",
+    cardColor: "var(--color-text-primary)",
   },
   {
     title: "Wedding Photography",
@@ -23,7 +23,7 @@ const services = [
     description: "Visual identity starts with great photography. Myke works with businesses and brands to produce commercial imagery that communicates quality, builds trust, and converts attention into action.",
     image: "/assets/images/service-commercial.jpg",
     cardBg: "rgba(10,10,10,0.75)",
-    cardColor: "#faf5ea",
+    cardColor: "var(--color-text-primary)",
   },
   {
     title: "Fashion & Editorial",
@@ -126,7 +126,6 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* "My Expertise" heading */}
         <div style={{
           position: "absolute", top: "40px", left: "50%",
           transform: "translateX(-50%)", zIndex: 2, textAlign: "center",
@@ -134,8 +133,8 @@ export default function ServicesSection() {
           <h2 style={{
             fontFamily: "var(--font-display)",
             fontSize: "clamp(48px, 8vw, 96px)",
-            fontWeight: 400, letterSpacing: "-0.04em", lineHeight: 1,
-            color: "var(--color-accent)",
+            fontWeight: 400, letterSpacing: "-0.045em", lineHeight: 0.9,
+            color: "var(--color-accent-light)",
             whiteSpace: "nowrap",
           }}>
             My Expertise

@@ -23,16 +23,16 @@ export default function FAQSection() {
         <div style={{ marginBottom: "60px" }}>
           <p style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(16px, 2vw, 20px)",
+            fontSize: "clamp(16px, 2vw, 22px)",
             fontWeight: 400, letterSpacing: "-0.01em",
-            color: "var(--color-text-muted)", marginBottom: "8px",
+            color: "var(--color-accent-light)", marginBottom: "10px",
           }}>
             FAQ Frenzy:
           </p>
           <h2 style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(36px, 5vw, 60px)",
-            fontWeight: 400, letterSpacing: "-0.04em", lineHeight: 1,
+            fontSize: "clamp(36px, 6vw, 72px)",
+            fontWeight: 400, letterSpacing: "-0.045em", lineHeight: 0.9,
             color: "var(--color-text-primary)",
           }}>
             Everything You Want to Know

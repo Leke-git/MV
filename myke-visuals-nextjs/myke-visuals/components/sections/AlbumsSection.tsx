@@ -162,9 +162,9 @@ export default function AlbumsSection({ albums }: Props) {
         }}>
           <h2 style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(32px, 5vw, 56px)",
-            fontWeight: 400, letterSpacing: "-0.04em", lineHeight: 1,
-            color: "var(--color-accent)",
+            fontSize: "clamp(36px, 5.5vw, 64px)",
+            fontWeight: 400, letterSpacing: "-0.045em", lineHeight: 0.9,
+            color: "var(--color-accent-light)",
           }}>
             Albums
           </h2>

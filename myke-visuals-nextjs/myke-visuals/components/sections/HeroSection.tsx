@@ -107,10 +107,10 @@ export default function HeroSection() {
       >
         <h1 style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(48px, 9.5vw, 148px)",
+          fontSize: "clamp(52px, 10.5vw, 157px)",
           fontWeight: 400,
-          lineHeight: 0.9,
-          letterSpacing: "-0.05em",
+          lineHeight: 0.80,
+          letterSpacing: "-0.055em",
           color: "var(--color-text-primary)",
           pointerEvents: "none",
           userSelect: "none",

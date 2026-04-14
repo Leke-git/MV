@@ -42,8 +42,8 @@ export default function ExtraServicesSection() {
       <div style={{ padding: "80px 40px 60px" }}>
         <h2 style={{
           fontFamily: "var(--font-display)",
-          fontSize: "clamp(48px, 8vw, 110px)",
-          fontWeight: 400, letterSpacing: "-0.04em", lineHeight: 0.9,
+          fontSize: "clamp(52px, 9vw, 120px)",
+          fontWeight: 400, letterSpacing: "-0.05em", lineHeight: 0.85,
           color: "#0a0a0a",
         }}>
           Wait…<br />

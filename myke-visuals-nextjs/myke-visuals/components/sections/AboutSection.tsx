@@ -48,8 +48,8 @@ export default function AboutSection() {
         >
           <h2 style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(48px, 6vw, 80px)",
-            fontWeight: 400, letterSpacing: "-0.04em", lineHeight: 1,
+            fontSize: "clamp(48px, 6vw, 66px)",
+            fontWeight: 400, letterSpacing: "-0.04em", lineHeight: 0.90,
             color: "var(--color-text-primary)",
           }}>
             I am …
@@ -57,22 +57,22 @@ export default function AboutSection() {
 
           <p style={{
             fontFamily: "var(--font-body)",
-            fontSize: "clamp(17px, 1.8vw, 22px)",
+            fontSize: "clamp(18px, 2vw, 22px)",
             fontWeight: 300, lineHeight: 1.65,
             letterSpacing: "-0.01em",
             color: "var(--color-text-primary)",
             maxWidth: "600px",
           }}>
             a{" "}
-            <span style={{ color: "var(--color-accent)" }}>photographer</span>
+            <span style={{ color: "var(--color-accent-light)" }}>photographer</span>
             {" "}and{" "}
-            <span style={{ color: "var(--color-accent)" }}>visual storyteller</span>
+            <span style={{ color: "var(--color-accent-light)" }}>visual storyteller</span>
             {" "}with over five years of professional experience capturing the moments, people,
             and brands that define Abuja&apos;s creative scene. From intimate portraits to
             large-scale commercial campaigns, every shoot I take on carries the same obsession
             — images that don&apos;t just document, but resonate. Beyond the lens, I built and
             run{" "}
-            <span style={{ color: "var(--color-accent)" }}>Myke Studios,</span>
+            <span style={{ color: "var(--color-accent-light)" }}>Myke Studios,</span>
             {" "}Abuja&apos;s premium creative space for photographers, videographers, creators,
             and brands who need a world-class environment to bring their vision to life.
           </p>
